@@ -1,0 +1,41 @@
+# all "." will be replace by ":" in YAML File [ NOTE : IN YAML FILE PROPER INDENDATION IS NEEDED ]
+
+server:
+  port: 3333
+
+
+#Eureka Configuration
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: ${EUREKA_SERVER_ADDRESS:http://localhost:2525/eureka}
+
+# Zipkin and Sleuth
+
+management:
+    tracing:
+        sampling:
+            probability: 1.0
+
+
+#  DB_HOST:localhost :: DB Host Environment available then it will take it, else local host !!
+
+spring:
+  application:
+    name: PAYMENT-SERVICE
+  config:
+    import: configserver:http://localhost:2020
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/Shopping_Cart_Payment_DB
+    password: Tarun@363
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
